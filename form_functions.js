@@ -68,7 +68,16 @@ function parse_results(result, form, msgdiv, leave_open, not_reset_form, prefix)
 		eval( "options.result = "+options.result.replace(/.+\[\{"messages/,'[{"messages').replace("</pre>",'')+";");
 	}
 
-	var msgArray = options.result[0].messages;
+   var msgArray;
+   if (options.result instanceof Array) {
+      msgArray = options.result[0].messages;
+   } else {
+      if (options.result.errors) {
+         msgArray = options.result.errors;
+      } else {
+         msgArray = options.result.success;
+      }
+   }
 	$.each(msgArray, function(i,o) {
 		for (var p in o) {
 			var val = o[p]; //p is the key or id in this case, and val is the message
