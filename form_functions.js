@@ -97,7 +97,7 @@ function parse_results(result, form, msgdiv, leave_open, not_reset_form, prefix)
 					$(this).html(label + ' ' + val);
 				}); //for loop
 				$(".errors_above").css('display','block'); //situated by submit button
-				if ( p == 'captcha' ) { 
+				if ( p == 'captcha' || p == 'generic' ) { 
 					$('#'+options.msgdiv).css('display','block');
 					$('#'+options.msgdiv).append('<p class="error">'+val+'</p>');
 				}
@@ -126,7 +126,7 @@ function parse_results(result, form, msgdiv, leave_open, not_reset_form, prefix)
 					$(this).html(label + ' ' + val);
 				}); //for loop
 				$(".errors_above").css('display','block'); //situated by submit button
-				if ( p == 'captcha' ) { 
+				if ( p == 'captcha' || p == 'generic' ) { 
 					$('#'+options.msgdiv).css('display','block');
 					$('#'+options.msgdiv).append('<p class="error">'+val+'</p>');
 				}
