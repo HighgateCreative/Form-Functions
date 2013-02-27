@@ -83,7 +83,13 @@ function parse_results(result, form, msgdiv, leave_open, not_reset_form, prefix)
 			var val = o[p]; //p is the key or id in this case, and val is the message
 
 			if (p == 'success') {
-				success += '<p class="success">' + val + '</p>';
+            if ( val instanceof Array ) {
+               $.each(val, function(i,el) {
+                  success += '<p class="success">' + el + '</p>';
+               });
+            } else {
+               success += '<p class="success">' + val + '</p>';
+            }
 			} else if (p.substring(0,3) == 'su_') { 
 				$($("label[for='"+p.substring(3)+"']")).not('.static_label').each(function(){
 					$(this).addClass('success_label');
