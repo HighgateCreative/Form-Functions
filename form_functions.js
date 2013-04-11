@@ -165,7 +165,11 @@ function parse_results(result, form, msgdiv, leave_open, not_reset_form, prefix)
 		} else if ( typeof options.redirect === 'function' ) {
 			options.redirect();
 		}
-	}
+	} else {
+		if (typeof options.error === 'function') {
+			options.error(options.result);
+		}
+   }
 }
 
 $(function() {
