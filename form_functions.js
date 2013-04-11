@@ -44,7 +44,8 @@ function normalize_labels(element, prefix) {
          
 function parse_results(result, form, msgdiv, leave_open, not_reset_form, prefix) {
 	var options = {
-      overlay: true
+      overlay: true,
+      showSuccessMsg: true
    };
 	if (!(typeof form === 'undefined')) {
 		options.result = result;
@@ -147,10 +148,14 @@ function parse_results(result, form, msgdiv, leave_open, not_reset_form, prefix)
 		if (!options.not_reset_form) {
 			$('#'+options.form).resetForm();
 		}
-		$('#'+options.msgdiv).css('display','block');
-		$('#'+options.msgdiv+' p').css('display','block');
-		$('#'+options.msgdiv+' p.error').css('display','none');
-		$('#'+options.msgdiv).append(success);
+   
+      if (options.showSuccessMsg) {
+         $('#'+options.msgdiv).css('display','block');
+         $('#'+options.msgdiv+' p').css('display','block');
+         $('#'+options.msgdiv+' p.error').css('display','none');
+         $('#'+options.msgdiv).append(success);
+      }
+
 		$('html, body').animate({scrollTop:0}, 'fast');
 		if (typeof options.success === 'function') {
 			options.success(options.result);
