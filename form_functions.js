@@ -8,7 +8,7 @@ function normalize_labels(element, prefix) {
 	}
 	$(".errors_above").css('display','none'); //situated by submit button
 	if(options.element){
-		$('#'+$(options.element).attr('id')+' label').not('.static_label').each(function(){
+		$('#'+$(options.element).attr('id')+' label[for]').not('.static_label').each(function(){
 			if ($(this).attr('lab')) {
 				var lab = $(this).attr('lab');
 			} else {
