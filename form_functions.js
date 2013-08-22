@@ -7,39 +7,21 @@ function normalize_labels(element, prefix) {
 		options.element = element;
 	}
 	$(".errors_above").css('display','none'); //situated by submit button
+   var selector;
 	if(options.element){
-		$('#'+$(options.element).attr('id')+' label[for]').not('.static_label').each(function(){
-			if ($(this).attr('lab')) {
-				var lab = $(this).attr('lab');
-			} else {
-				var lab = $(this).attr('for');
-			}
-			if ($('label.static_label[for="'+$(this).attr('for')+'"]').length != 0 ) {
-				lab = '';
-			}
-			//$($("input[id='"+lab+"']")).css('background-color','#fff');
-			lab = lab.slice(0,1).toUpperCase() + lab.slice(1);
-			lab = lab.replace(/_/g, " ");
-			$(this).removeClass('error_label');
-			$(this).text(lab);
-		});
+		selector = $('#'+$(options.element).attr('id')+' label[for]');
 	} else {
-		$('label').not('.static_label').each(function(){   
-			if ($(this).attr('lab')) {
-				var lab = $(this).attr('lab');
-			} else {
-				var lab = $(this).attr('for');
-			}
-			if ($('label.static_label[for="'+$(this).attr('for')+'"]').length != 0 ) {
-				lab = '';
-			}
-			//$($("input[id='"+lab+"']")).css('background-color','#fff');
-			lab = lab.slice(0,1).toUpperCase() + lab.slice(1);
-			lab = lab.replace(/_/g, " ");
-			$(this).removeClass('error_label');
-			$(this).text(lab);
-		});
+		selector = $('label[for]');
 	}
+   // Now normalize
+   selector.not('.static_label').each(function(){
+      $(this).removeClass('error_label');
+      var lab = getLabel(this, options);
+      if ($('label.static_label[for="'+$(this).attr('for')+'"]').length != 0 ) {
+         lab = '';
+      }
+      $(this).text(lab);
+   });
 }
          
 function parse_results(result, form, msgdiv, leave_open, not_reset_form, prefix) {
@@ -94,14 +76,7 @@ function parse_results(result, form, msgdiv, leave_open, not_reset_form, prefix)
 			} else if (p.substring(0,3) == 'su_') { 
 				$($("label[for='"+p.substring(3)+"']")).not('.static_label').each(function(){
 					$(this).addClass('success_label');
-               var label;
-					if ($(this).attr('lab')) {
-						label = $(this).attr('lab').slice(0,1).toUpperCase() + $(this).attr('lab').slice(1);
-					} else {
-						label = $(this).attr('for').slice(0,1).toUpperCase() + $(this).attr('for').slice(1);
-					}
-               label = label.replace(/_/g, " ");
-					$(this).html(label + ' ' + val);
+					$(this).html(getLabel(this, options) + ' ' + val);
 				}); //for loop
 				$(".errors_above").css('display','block'); //situated by submit button
 				if ( p == 'captcha' || p == 'generic' ) { 
@@ -120,17 +95,7 @@ function parse_results(result, form, msgdiv, leave_open, not_reset_form, prefix)
 				p = p.replace('&#223;','ß');
 				$($("#"+options.form+" label[for='"+p+"']")).not('.static_label').each(function(){
 					$(this).addClass('error_label');
-					if ($(this).attr('lab')) {
-						label = $(this).attr('lab').slice(0,1).toUpperCase() + $(this).attr('lab').slice(1);
-					} else {
-                  label = $(this).attr('for');
-                  if (options.prefix) {
-                     label = label.replace(options.prefix, "");
-                  }
-						label = label.slice(0,1).toUpperCase() + label.slice(1);
-					}
-               label = label.replace(/_/g, " ");
-					$(this).html(label + ' ' + val);
+					$(this).html(getLabel(this, options) + ' ' + val);
 				}); //for loop
 				$(".errors_above").css('display','block'); //situated by submit button
 				if ( p == 'captcha' || p == 'generic' ) { 
@@ -170,6 +135,23 @@ function parse_results(result, form, msgdiv, leave_open, not_reset_form, prefix)
 			options.error(options.result);
 		}
    }
+}
+
+function getLabel(that, options) {
+   if (! $(that).data('lab')) {
+      var value = $(that).attr('lab') || $(that).text();
+      $(that).data('lab', value);
+   }
+   var label = $(that).data('lab') || $(that).attr('lab') || $(that).attr('for');
+
+   if (options.prefix) {
+      label = label.replace(options.prefix, "");
+   }
+   if (options.capitalize) {
+      label = $(that).attr('lab').slice(0,1).toUpperCase() + $(that).attr('lab').slice(1);
+   }
+   label = label.replace(/_/g, " ");
+   return label;
 }
 
 $(function() {
