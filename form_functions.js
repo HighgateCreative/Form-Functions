@@ -49,6 +49,8 @@ function parse_results(result, form, msgdiv, leave_open, not_reset_form, prefix)
 	}
 	if ( typeof options.result == 'string' && options.result.match(/.+\[\{"messages/ ) ) {
 		eval( "options.result = "+options.result.replace(/.+\[\{"messages/,'[{"messages').replace("</pre>",'')+";");
+	} else if ( typeof options.result == 'string' ) {
+		eval( "options.result = "+options.result.replace(/<\/?pre>/gi,'')+";");
 	}
 
    var msgArray;
