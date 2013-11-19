@@ -24,6 +24,28 @@ function normalize_labels(element, prefix) {
    });
 }
          
+function preprocess_result(result) {
+	if ( typeof result == 'string' && result[0] == '[') {
+		eval( "result = " + result );
+	}
+	if ( typeof result == 'string' && result.match(/.+\[\{"messages/ ) ) {
+		eval( "result = "+result.replace(/.+\[\{"messages/,'[{"messages').replace("</pre>",'')+";");
+	} else if ( typeof result == 'string' ) {
+		eval( "result = "+$(result).text()+";");
+	}
+
+   var msgArray;
+   if (result instanceof Array) {
+      msgArray = result[0].messages;
+   } else {
+      if (result.errors) {
+         msgArray = result.errors;
+      } else {
+         msgArray = result.success;
+      }
+   }
+   return msgArray;
+}
 function parse_results(result, form, msgdiv, leave_open, not_reset_form, prefix) {
 	var options = {
       overlay: true,
@@ -44,26 +66,7 @@ function parse_results(result, form, msgdiv, leave_open, not_reset_form, prefix)
    }
 	$('#'+options.msgdiv+' p.error').remove();
 	var success = '';
-	if ( typeof options.result == 'string' && options.result[0] == '[') {
-		eval( "options.result = " + options.result );
-	}
-	if ( typeof options.result == 'string' && options.result.match(/.+\[\{"messages/ ) ) {
-		eval( "options.result = "+options.result.replace(/.+\[\{"messages/,'[{"messages').replace("</pre>",'')+";");
-	} else if ( typeof options.result == 'string' ) {
-		eval( "options.result = "+options.result.replace(/<\/?pre>/gi,'')+";");
-	}
-
-   var msgArray;
-   if (options.result instanceof Array) {
-      msgArray = options.result[0].messages;
-   } else {
-      if (options.result.errors) {
-         msgArray = options.result.errors;
-      } else {
-         msgArray = options.result.success;
-      }
-   }
-	$.each(msgArray, function(i,o) {
+	$.each(preprocess_result(options.result), function(i,o) {
 		for (var p in o) {
 			var val = o[p]; //p is the key or id in this case, and val is the message
 
