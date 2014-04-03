@@ -26,12 +26,12 @@ function normalize_labels(element, prefix) {
          
 function preprocess_result(result) {
 	if ( typeof result == 'string' && result[0] == '[') {
-		eval( "result = " + result );
+		result = JSON.parse(result);
 	}
 	if ( typeof result == 'string' && result.match(/.+\[\{"messages/ ) ) {
-		eval( "result = "+result.replace(/.+\[\{"messages/,'[{"messages').replace("</pre>",'')+";");
+		result = JSON.parse(result.replace(/.+\[\{"messages/,'[{"messages').replace("</pre>",''));
 	} else if ( typeof result == 'string' ) {
-		eval( "result = "+$(result).text()+";");
+		result = JSON.parse($(result).text());
 	}
 
    var msgArray;
