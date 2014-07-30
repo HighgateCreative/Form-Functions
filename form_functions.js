@@ -73,10 +73,10 @@ function parse_results(result, form, msgdiv, leave_open, not_reset_form, prefix)
 			if (p == 'success') {
             if ( val instanceof Array ) {
                $.each(val, function(i,el) {
-                  success += '<p class="success">' + el + '</p>';
+                  success += $('<textarea />').html('<p class="success">' + el + '</p>').text();
                });
             } else {
-               success += '<p class="success">' + val + '</p>';
+               success += $('<textarea />').html('<p class="success">' + val + '</p>').text();
             }
 			} else if (p.substring(0,3) == 'su_') { 
 				$($("label[for='"+p.substring(3)+"']")).not('.static_label').each(function(){
