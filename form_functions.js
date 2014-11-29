@@ -161,7 +161,7 @@ function getLabel(that, options) {
 
 $(function() {
 	//Bind up key for counters
-	$('textarea.counter').live('keyup', function(event) {
+	$(document).on('keyup', 'textarea.counter', function(event) {
 		var text = $(this).val();
 		var len = text.length;
 
