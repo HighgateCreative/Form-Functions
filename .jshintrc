@@ -1,0 +1,23 @@
+{
+    "boss": true,
+    "curly": true,
+    "eqeqeq": true,
+    "eqnull": true,
+    "expr": true,
+    "exported": [
+        "counter",
+        "parse_results",
+        "format_currency",
+        "normalize_labels"
+    ],
+    "immed": true,
+    "loopfunc": true,
+    "noarg": true,
+    "onevar": true,
+    "quotmark": "double",
+    "smarttabs": true,
+    "trailing": true,
+    "unused": true,
+    "node": true,
+    "multistr": true
+}
