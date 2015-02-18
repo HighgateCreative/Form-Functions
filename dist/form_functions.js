@@ -58,7 +58,8 @@ function parse_results(result, form, msgdiv, leave_open, not_reset_form, prefix)
     var options = {
         overlay: true,
         showSuccessMsg: true,
-        form: $("form").first()
+        form: $("form").first(),
+        scrollToError: false
     };
     if (typeof form !== "undefined") {
         options.result = result;
@@ -156,6 +157,11 @@ function parse_results(result, form, msgdiv, leave_open, not_reset_form, prefix)
             options.redirect();
         }
     } else {
+        // Scroll to First error
+        if ( options.scrollToError ) {
+            $("html, body").animate({ scrollTop: $form.find(".error_label").offset().top }, "fast");
+        }
+
         if (typeof options.error === "function") {
             options.error(options.result);
         }
