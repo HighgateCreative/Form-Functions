@@ -49,7 +49,8 @@ function preprocess_result(result) {
 function parse_results(result, form, msgdiv, leave_open, not_reset_form, prefix) {
     var options = {
         overlay: true,
-        showSuccessMsg: true
+        showSuccessMsg: true,
+        form: $("form").first()
     };
     if (typeof form !== "undefined") {
         options.result = result;
@@ -66,6 +67,17 @@ function parse_results(result, form, msgdiv, leave_open, not_reset_form, prefix)
     }
     $("#"+options.msgdiv+" p.error").remove();
     var success = "";
+
+    // Cache form jQuery object
+    var $form;
+    // Check if form option is a jQuery object
+    if ( options.form instanceof $ ) {
+        $form = options.form;
+    } else {
+        // Otherwise assume it's an id for the form
+        $form = $("#"+options.form);
+    }
+
     $.each(preprocess_result(options.result), function(i,o) {
         for (var p in o) {
             var val = o[p]; //p is the key or id in this case, and val is the message
@@ -98,7 +110,7 @@ function parse_results(result, form, msgdiv, leave_open, not_reset_form, prefix)
                 p = p.replace("&#252;","ü");
                 p = p.replace("&#220;","Ü");
                 p = p.replace("&#223;","ß");
-                $($("#"+options.form+" label[for='"+p+"']")).not(".static_label").each(function(){
+                $($form.find("label[for='"+p+"']")).not(".static_label").each(function(){
                     $(this).addClass("error_label");
                     $(this).html(getLabel(this, options) + " " + val);
                 }); //for loop
@@ -113,10 +125,10 @@ function parse_results(result, form, msgdiv, leave_open, not_reset_form, prefix)
 
     if (success) {
         if (!options.leave_open) {
-            $("#"+options.form).hide("fast");
+            $form.hide("fast");
         }
         if (!options.not_reset_form) {
-            $("#"+options.form).resetForm();
+            $form.resetForm();
         }
 
         if (options.showSuccessMsg) {
