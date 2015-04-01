@@ -151,7 +151,14 @@ function parse_results(result, form, msgdiv, leave_open, not_reset_form, prefix)
     } else {
         // Scroll to First error
         if ( options.scrollToError ) {
-            $("html, body").animate({ scrollTop: $form.find(".error_label").offset().top }, "fast");
+            // First check for an error in the msg element
+            var firstError = $("#" + options.msgdiv + " .error");
+            // If no elements are found use the first error label
+            if ( firstError.length === 0 ) {
+                firstError = $form.find(".error_label, .error");
+            }
+            // Now animate a scroll to whatever we found
+            $("html, body").animate({ scrollTop: firstError.offset().top }, "fast");
         }
 
         if (typeof options.error === "function") {
