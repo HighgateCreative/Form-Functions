@@ -79,3 +79,14 @@ parse_results({
                                 // passed into the result argument.
 });
 ```
+
+## Contribute
+PRs Welcomed!!
+
+When contributing make sure you compile the js otherwise you will be asked to update your PR with the compiled js.
+
+To compile:
+
+```sh
+grunt
+```
