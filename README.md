@@ -90,3 +90,9 @@ To compile:
 ```sh
 grunt
 ```
+
+To watch files and compile on the fly:
+
+```sh
+grunt watch
+```
