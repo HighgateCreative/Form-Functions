@@ -111,15 +111,32 @@ function parse_results(result, form, msgdiv, leave_open, not_reset_form, prefix)
                 p = p.replace("&#252;","ü");
                 p = p.replace("&#220;","Ü");
                 p = p.replace("&#223;","ß");
-                $($form.find("label[for='"+p+"']")).not(".static_label").each(function(){
-                    $(this).addClass("error_label");
-                    $(this).html(getLabel(this, options) + " " + val);
-                }); //for loop
-                $(".errors_above").css("display","block"); //situated by submit button
+
+                // Either the label is a general error or a specific error
                 if ( p === "captcha" || p === "generic" ) {
                     $("#"+options.msgdiv).css("display","block");
                     $("#"+options.msgdiv).append("<p class=\"error\">"+val+"</p>");
+                } else {
+                    var labels = $($form.find("label[for='"+p+"']")).not(".static_label");
+                    labels.each(function(){
+                        $(this).addClass("error_label");
+                        $(this).html(getLabel(this, options) + " " + val);
+                    });
+
+                    // If no labels were found, make it a general label
+                    if ( labels.length <= 0 ) {
+                        // Get readable version of field
+                        var fieldNameReadable = p.replace(/_/, " ");
+                        if ( options.capitalize ) {
+                            fieldNameReadable = fieldNameReadable.slice(0,1).toUpperCase() + fieldNameReadable.slice(1);
+                        }
+
+                        $("#"+options.msgdiv).css("display","block");
+                        $("#"+options.msgdiv).append("<p class=\"error\">" + fieldNameReadable + " " + val + "</p>");
+                    }
                 }
+
+                $(".errors_above").css("display","block"); //situated by submit button
             }
         }
     });//each
