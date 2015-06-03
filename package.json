@@ -1,4 +1,7 @@
 {
+  "name": "Form-Functions",
+  "version": "1.2.1",
+  "description": "Help functions for processing form errors",
   "private": true,
   "devDependencies": {
     "grunt": "~0.4.5",
@@ -9,7 +12,10 @@
     "grunt-contrib-watch": "^0.6.1",
     "jquery": "^1.7.0"
   },
+  "author": "lejeunerenard",
+  "readmeFilename": "README.md",
   "dependencies": {
     "jquery": "^1.7.0"
-  }
+  },
+  "license": "MIT"
 }
