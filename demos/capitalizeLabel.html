@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Report Errors without a Label as Generic</title>
+</head>
+<body>
+    <div id="msgs">
+    </div>
+    <form id="capital" action="#">
+        <p class="wrap">
+            <label for="bar" class="label">bar should be capitalized</label>
+            <input id="bar" type="text" name="bar">
+        </p>
+        <p class="wrap"><input type="submit" value="Go"></p>
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="../dist/form_functions.js"></script>
+    <script>
+        $(function() {
+                window.setTimeout(function() {
+                    parse_results({
+                        form: $('#capital'),
+                        msgdiv: 'msgs',
+                        capitalize: true,
+                        result: {
+                            errors: [
+                                { bar: "cannot be blank" }
+                            ]
+                        },
+                    });
+                }, 1000);
+        });
+    </script>
+    <form id="noCapital" action="#">
+        <p class="wrap">
+            <label for="foo" class="label">foo should NOT be capitalized</label>
+            <input id="foo" type="text" name="foo">
+        </p>
+        <p class="wrap"><input type="submit" value="Go"></p>
+    </form>
+    <script>
+        $(function() {
+                window.setTimeout(function() {
+                    parse_results({
+                        form: $('#noCapital'),
+                        result: {
+                            errors: [
+                                { foo: "cannot be blank" }
+                            ]
+                        },
+                    });
+                }, 1000);
+        });
+    </script>
+</body>
+</html>

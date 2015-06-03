@@ -195,7 +195,7 @@ function getLabel(that, options) {
         label = label.replace(options.prefix, "");
     }
     if (options.capitalize) {
-        label = $(that).attr("lab").slice(0,1).toUpperCase() + $(that).attr("lab").slice(1);
+        label = label.slice(0,1).toUpperCase() + label.slice(1);
     }
     label = label.replace(/_/g, " ");
     return label;

@@ -1,5 +1,5 @@
 /*
- *  Form-Functions - v1.1.2
+ *  Form-Functions - v1.2.1
  *  Help functions for processing form errors
  *  http://highgate-creative.com
  *
@@ -203,7 +203,7 @@ function getLabel(that, options) {
         label = label.replace(options.prefix, "");
     }
     if (options.capitalize) {
-        label = $(that).attr("lab").slice(0,1).toUpperCase() + $(that).attr("lab").slice(1);
+        label = label.slice(0,1).toUpperCase() + label.slice(1);
     }
     label = label.replace(/_/g, " ");
     return label;
