@@ -49,7 +49,7 @@ parse_results({
   result: result,               // Results from server
   form: 'contact',              // The form's jQuery object or id
   msgdiv: 'msgs',               // Id of element to display general messages
-  leave_open: false,            // Default ( true ) – Whether the form
+  leave_open: true,             // Default ( false ) – Whether the form
                                 // should be left open on success
   scrollToError: true,          // Default ( false ) – When set to true,
                                 // scrolls to the first error in the form
