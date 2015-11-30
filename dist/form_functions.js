@@ -54,10 +54,26 @@ function preprocess_result(result) {
     }
     return msgArray;
 }
+function FormFunctions (options) {
+    this.msgdiv = $("#"+options.msgdiv);
+    this.prependMsg = options.prependMsg;
+}
+FormFunctions.prototype.addGenericMessage = function addMessage(message) {
+    this.msgdiv.css("display","block");
+    if (this.prependMsg){
+        this.msgdiv.prepend(message);
+    } else {
+        this.msgdiv.append(message);
+    }
+};
+FormFunctions.prototype.addGenericError = function addMessage(error) {
+    this.addGenericMessage("<p class=\"error\">"+error+"</p>");
+};
 function parse_results(result, form, msgdiv, leave_open, not_reset_form, prefix) {
     var options = {
         overlay: true,
         showSuccessMsg: true,
+        prependMsg: false,
         form: $("form").first(),
         scrollToError: false
     };
@@ -71,10 +87,14 @@ function parse_results(result, form, msgdiv, leave_open, not_reset_form, prefix)
     } else {
         options = $.extend({},options,result);
     }
+
+    // Create managing FormFunction instance
+    var formFunctions = new FormFunctions(options);
+
     if (options.overlay) {
         $("#overlay").css("display","none");
     }
-    $("#"+options.msgdiv+" p.error").remove();
+    formFunctions.msgdiv.find("p.error").remove();
     var success = "";
 
     // Cache form jQuery object
@@ -106,8 +126,7 @@ function parse_results(result, form, msgdiv, leave_open, not_reset_form, prefix)
                 }); //for loop
                 $(".errors_above").css("display","block"); //situated by submit button
                 if ( p === "captcha" || p === "generic" ) {
-                    $("#"+options.msgdiv).css("display","block");
-                    $("#"+options.msgdiv).append("<p class=\"error\">"+val+"</p>");
+                    formFunctions.addGenericError(val);
                 }
             } else if (p === "output") {
                 return;
@@ -122,8 +141,7 @@ function parse_results(result, form, msgdiv, leave_open, not_reset_form, prefix)
 
                 // Either the label is a general error or a specific error
                 if ( p === "captcha" || p === "generic" ) {
-                    $("#"+options.msgdiv).css("display","block");
-                    $("#"+options.msgdiv).append("<p class=\"error\">"+val+"</p>");
+                    formFunctions.addGenericError(val);
                 } else {
                     var labels = $($form.find("label[for='"+p+"']")).not(".static_label");
                     labels.each(function(){
@@ -139,8 +157,7 @@ function parse_results(result, form, msgdiv, leave_open, not_reset_form, prefix)
                             fieldNameReadable = fieldNameReadable.slice(0,1).toUpperCase() + fieldNameReadable.slice(1);
                         }
 
-                        $("#"+options.msgdiv).css("display","block");
-                        $("#"+options.msgdiv).append("<p class=\"error\">" + fieldNameReadable + " " + val + "</p>");
+                        formFunctions.addGenericError(fieldNameReadable + " " + val);
                     }
                 }
 
@@ -158,10 +175,10 @@ function parse_results(result, form, msgdiv, leave_open, not_reset_form, prefix)
         }
 
         if (options.showSuccessMsg) {
-            $("#"+options.msgdiv).css("display","block");
-            $("#"+options.msgdiv+" p").css("display","block");
-            $("#"+options.msgdiv+" p.error").css("display","none");
-            $("#"+options.msgdiv).append(success);
+            formFunctions.msgdiv.css("display","block");
+            formFunctions.msgdiv.find("p").css("display","block");
+            formFunctions.msgdiv.find("p.error").css("display","none");
+            formFunctions.addGenericMessage(success);
         }
 
         $("html, body").animate({scrollTop:0}, "fast");
@@ -177,7 +194,7 @@ function parse_results(result, form, msgdiv, leave_open, not_reset_form, prefix)
         // Scroll to First error
         if ( options.scrollToError ) {
             // First check for an error in the msg element
-            var firstError = $("#" + options.msgdiv + " .error");
+            var firstError = formFunctions.msgdiv.find(".error");
             // If no elements are found use the first error label
             if ( firstError.length === 0 ) {
                 firstError = $form.find(".error_label, .error");

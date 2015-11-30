@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <h2>Before</h2>
+    <div id="msgs">
+        <p>This is a hard-coded message.</p>
+    </div>
+    <form action="#">
+        <p class="wrap">
+            <label for="thing" class="label">Thing</label>
+            <input id="thing" type="text" name="thing">
+        </p>
+        <p class="wrap"><input type="submit" value="Go"></p>
+    </form>
+    <h2>After</h2>
+    <div id="msgsAfter">
+        <p>This is a hard-coded message.</p>
+    </div>
+    <form action="#">
+        <p class="wrap">
+            <label for="thing" class="label">Thing</label>
+            <input id="thing" type="text" name="thing">
+        </p>
+        <p class="wrap"><input type="submit" value="Go"></p>
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="../dist/form_functions.js"></script>
+    <script>
+        $(function() {
+            parse_results({
+                msgdiv: 'msgs',
+                result: {
+                    errors: [
+                    {
+                        generic: "That which comes before",
+                    }
+                    ]
+                },
+                prependMsg: true
+            });
+            parse_results({
+                msgdiv: 'msgsAfter',
+                form: $('form').eq(1),
+                result: {
+                    errors: [
+                    {
+                        generic: "That which comes after",
+                    }
+                    ]
+                },
+                prependMsg: false
+            });
+        });
+    </script>
+</body>
+</html>
