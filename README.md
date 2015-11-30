@@ -56,6 +56,9 @@ parse_results({
                                 // when errors are returned
   not_reset_form: true,         // Default ( false ) – Whether to reset
                                 // form after successful submission
+  prependMsg: true,             // Default ( false ) – Whether messages added
+                                // to the `msgdiv` element are prepended
+                                // instead of appended.
   prefix: 'contact_',           // Prefix all errors with the given string
                                 // to find the corresponding <label>'s
                                 // "for" attr.
