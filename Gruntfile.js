@@ -12,7 +12,7 @@ module.exports = function(grunt) {
                 " *  <%= pkg.description %>\n" +
                 " *  <%= pkg.homepage %>\n" +
                 " *\n" +
-                " *  Made by <%= pkg.authors[0] %>\n" +
+                " *  Made by \n<% _.forEach(pkg.authors, function(author) { %> *  <%= author %>\n<%  }); %>" +
                 " *  Under <%= pkg.license %> License\n" +
                 " */\n"
         },
