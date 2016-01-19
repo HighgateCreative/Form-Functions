@@ -4,7 +4,7 @@
 	"homepage": "http://highgate-creative.com",
 	"authors": [
 		"Sean Zellmer <sean@lejeunerenard.com>",
-		"Bradford Cathey <brad@highgate-creative.com>"
+		"Bradford Cathey <bradc@highgate-creative.com>"
 	],
 	"description": "Help functions for processing form errors",
 	"main": "src/form_functions.js",

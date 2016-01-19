@@ -5,7 +5,7 @@
  *
  *  Made by 
  *  Sean Zellmer <sean@lejeunerenard.com>
- *  Bradford Cathey <brad@highgate-creative.com>
+ *  Bradford Cathey <bradc@highgate-creative.com>
  *  Under MIT License
  */
 ;(function(document, window, $, undefined) {
