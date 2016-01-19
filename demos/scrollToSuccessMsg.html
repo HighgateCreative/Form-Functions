@@ -8,13 +8,13 @@
     <p>lalalalalalla</p>
     <p>lalalalalalla</p>
     <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
     <div id="msgs"></div>
-    <p>lalalalalalla</p>
-    <p>lalalalalalla</p>
-    <p>lalalalalalla</p>
-    <p>lalalalalalla</p>
-    <p>lalalalalalla</p>
-    <p>lalalalalalla</p>
     <p>lalalalalalla</p>
     <p>lalalalalalla</p>
     <p>lalalalalalla</p>
@@ -117,6 +117,7 @@
     <script src="../dist/form_functions.js"></script>
     <script>
         $(function() {
+                $("html, body").animate({ scrollTop: 100 }, "fast");
                 window.setTimeout(function() {
                     parse_results({
                         msgdiv: 'msgs',
@@ -125,9 +126,25 @@
                                 { success: "You did it! \\(^.^)/" }
                             ]
                         },
-                        scrollToError: true
+                        success: function() {
+                            console.log('Scroll to success in view');
+                            window.setTimeout(function() {
+                                $("html, body").animate({ scrollTop: 3000 }, "fast");
+                            }, 1000);
+                        }
                     });
                 }, 1000);
+                window.setTimeout(function() {
+                    parse_results({
+                        msgdiv: 'msgs',
+                        result: {
+                            success: [
+                                { success: "You did it! \\(^.^)/" }
+                            ]
+                        },
+                    });
+                    console.log('Scroll to success out of view');
+                }, 3000);
         });
     </script>
 </body>

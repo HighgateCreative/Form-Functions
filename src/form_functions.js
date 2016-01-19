@@ -174,7 +174,9 @@
                 formFunctions.addGenericMessage(success);
 
                 // Scroll to Success message
-                $("html, body").animate({scrollTop:formFunctions.msgdiv.offset().top}, "fast");
+                if (formFunctions.msgdiv.offset().top < $(document).scrollTop()) {
+                    $("html, body").animate({scrollTop:formFunctions.msgdiv.offset().top}, "fast");
+                }
             }
 
             if (typeof options.success === "function") {
