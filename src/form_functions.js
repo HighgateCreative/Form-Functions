@@ -172,9 +172,11 @@
                 formFunctions.msgdiv.find("p").css("display","block");
                 formFunctions.msgdiv.find("p.error").css("display","none");
                 formFunctions.addGenericMessage(success);
+
+                // Scroll to Success message
+                $("html, body").animate({scrollTop:formFunctions.msgdiv.offset().top}, "fast");
             }
 
-            $("html, body").animate({scrollTop:0}, "fast");
             if (typeof options.success === "function") {
                 options.success(options.result);
             }

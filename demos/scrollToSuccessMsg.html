@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test scrolling to success message</title>
+</head>
+<body>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <div id="msgs"></div>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <p>lalalalalalla</p>
+    <form action="#">
+        <p class="wrap">
+            <label for="thing" class="label">Thing</label>
+            <input id="thing" type="text" name="thing">
+        </p>
+        <p class="wrap"><input type="submit" value="Go"></p>
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="../dist/form_functions.js"></script>
+    <script>
+        $(function() {
+                window.setTimeout(function() {
+                    parse_results({
+                        msgdiv: 'msgs',
+                        result: {
+                            success: [
+                                { success: "You did it! \\(^.^)/" }
+                            ]
+                        },
+                        scrollToError: true
+                    });
+                }, 1000);
+        });
+    </script>
+</body>
+</html>
