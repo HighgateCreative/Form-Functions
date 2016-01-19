@@ -203,10 +203,6 @@
     }
 
     function getLabel(that, options) {
-        if (! $(that).data("lab")) {
-            var value = $(that).attr("lab") || $(that).text();
-            $(that).data("lab", value);
-        }
         var label = $(that).data("lab") || $(that).attr("lab") || $(that).attr("for");
 
         if (options.prefix) {
@@ -216,6 +212,12 @@
             label = label.slice(0,1).toUpperCase() + label.slice(1);
         }
         label = label.replace(/_/g, " ");
+
+        // Cache label value in data attr
+        if (! $(that).data("lab")) {
+            var value = $(that).attr("lab") || $(that).text();
+            $(that).data("lab", value);
+        }
         return label;
     }
 
