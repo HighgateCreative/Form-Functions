@@ -174,7 +174,7 @@
                 $form.hide("fast");
             }
             if (!options.not_reset_form) {
-                $form.resetForm();
+                $form.get(0).reset();
             }
 
             if (options.showSuccessMsg) {
