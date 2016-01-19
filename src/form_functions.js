@@ -136,7 +136,7 @@
                     if ( p === "captcha" || p === "generic" ) {
                         formFunctions.addGenericError(val);
                     } else {
-                        var labels = $($form.find("label[for='"+p+"']")).not(".static_label");
+                        var labels = $form.find("label[for='"+p+"']").not(".static_label");
                         labels.each(function(){
                             $(this).addClass("error_label");
                             $(this).html(getLabel(this, options) + " " + val);
