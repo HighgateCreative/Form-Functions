@@ -215,8 +215,7 @@
 
         // Cache label value in data attr
         if (! $(that).data("lab")) {
-            var value = $(that).attr("lab") || $(that).text();
-            $(that).data("lab", value);
+            $(that).data("lab", label);
         }
         return label;
     }
