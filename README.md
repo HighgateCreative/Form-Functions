@@ -62,6 +62,8 @@ parse_results({
   prefix: 'contact_',           // Prefix all errors with the given string
                                 // to find the corresponding <label>'s
                                 // "for" attr.
+  errorsOnField: false,         // Default ( true ) – Whether errors should
+                                // be added to fields
   overlay: false,               // Default ( true ) – Whether to place an
                                 // overlay over the form. The overlay is
                                 // assumed to be already provided as an

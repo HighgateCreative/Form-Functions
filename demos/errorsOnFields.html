@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Report Errors without a Label as Generic</title>
+    <style>
+input:invalid, input.error {
+    border: 1px solid red;
+}
+    </style>
+</head>
+<body>
+    <div id="msgs">
+    </div>
+    <h2>Fields Styled</h2>
+    <form id="fields-styled" action="#">
+        <p class="wrap">
+            <label for="bar" class="label">bar</label>
+            <input id="bar" type="text" name="bar">
+        </p>
+        <p class="wrap">
+            <label for="valid" class="label">Valid</label>
+            <input id="valid" type="text" name="valid">
+        </p>
+        <p class="wrap"><input type="submit" value="Go"></p>
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="../dist/form_functions.js"></script>
+    <script>
+        $(function() {
+                window.setTimeout(function() {
+                    parse_results({
+                        form: $('#fields-styled'),
+                        msgdiv: 'msgs',
+                        result: {
+                            errors: [
+                                { bar: "cannot be blank" }
+                            ]
+                        },
+                    });
+                }, 1000);
+        });
+    </script>
+    <h2>Fields Not Styled</h2>
+    <form id="field-not-styled" action="#">
+        <p class="wrap">
+            <label for="foo" class="label">foo not colored</label>
+            <input id="foo" type="text" name="foo">
+        </p>
+        <p class="wrap"><input type="submit" value="Go"></p>
+    </form>
+    <script>
+        $(function() {
+                window.setTimeout(function() {
+                    parse_results({
+                        form: $('#field-not-styled'),
+                        errorsOnField: false,
+                        result: {
+                            errors: [
+                                { foo: "cannot be blank" }
+                            ]
+                        },
+                    });
+                }, 1000);
+        });
+    </script>
+</body>
+</html>

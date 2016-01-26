@@ -18,8 +18,16 @@
         selector.not(".static_label").each(function(){
             $(this).removeClass("error_label");
             var lab = getLabel(this, options);
+            var field = document.getElementById( this.htmlFor );
             if ($("label.static_label[for=\""+$(this).attr("for")+"\"]").length !== 0 ) {
                 lab = "";
+            }
+            if ( field ) {
+                if ( typeof field.setCustomValidity !== "undefined" ) {
+                    field.setCustomValidity("");
+                } else {
+                    $(field).removeClass("error");
+                }
             }
             $(this).text(lab);
         });
@@ -68,7 +76,8 @@
             showSuccessMsg: true,
             prependMsg: false,
             form: $("form").first(),
-            scrollToError: false
+            scrollToError: false,
+            errorsOnField: true,
         };
         if (typeof form !== "undefined") {
             options.result = result;
@@ -139,7 +148,18 @@
                         var labels = $form.find("label[for='"+p+"']").not(".static_label");
                         labels.each(function(){
                             $(this).addClass("error_label");
-                            $(this).html(getLabel(this, options) + " " + val);
+                            var errMsg = getLabel(this, options) + " " + val;
+
+                            var field = document.getElementById(this.htmlFor);
+                            if ( options.errorsOnField && field ) {
+                                if ( typeof field.setCustomValidity !== "undefined" ) {
+                                    field.setCustomValidity(errMsg);
+                                } else {
+                                    $( field ).addClass("error");
+                                }
+                            }
+
+                            $(this).html(errMsg);
                         });
 
                         // If no labels were found, make it a general label
