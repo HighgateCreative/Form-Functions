@@ -164,6 +164,11 @@
                             if ( options.errorsOnField && field ) {
                                 if ( typeof field.setCustomValidity !== "undefined" ) {
                                     field.setCustomValidity(errMsg);
+                                    var clearValidity = function() {
+                                        field.setCustomValidity("");
+                                        field.removeEventListener("change", clearValidity);
+                                    };
+                                    field.addEventListener("change", clearValidity);
                                 } else {
                                     $( field ).addClass("error");
                                 }
