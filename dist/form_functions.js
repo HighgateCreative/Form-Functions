@@ -162,7 +162,7 @@
 
                             var field = document.getElementById(this.htmlFor);
                             if ( options.errorsOnField && field ) {
-                                if ( typeof field.setCustomValidity !== "undefined" ) {
+                                if ( typeof field.setCustomValidity !== "undefined" && !field.getAttribute("aria-hidden") ) {
                                     field.setCustomValidity(errMsg);
                                     var clearValidity = function() {
                                         field.setCustomValidity("");
