@@ -3,6 +3,9 @@
   "version": "1.2.1",
   "description": "Help functions for processing form errors",
   "private": true,
+  "scripts": {
+      "start": "grunt watch"
+  },
   "devDependencies": {
     "grunt": "~0.4.5",
     "grunt-cli": "~0.1.13",
