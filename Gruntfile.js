@@ -32,7 +32,10 @@ module.exports = function(grunt) {
         jshint: {
             files: ["src/form_functions.js"],
             options: {
-                jshintrc: ".jshintrc"
+                jshintrc: ".jshintrc",
+                // Source:
+                // https://github.com/jshint/jshint/issues/2922#issuecomment-219263558
+                reporterOutput: ""
             }
         },
 

@@ -70,6 +70,28 @@
     FormFunctions.prototype.addGenericError = function addMessage(error) {
         this.addGenericMessage("<p class=\"error\">"+error+"</p>");
     };
+    FormFunctions.prototype.reportServerErrorCallback = function reportServerErrorCallback () {
+        var self = this;
+
+        return function reportServerError (_, status) {
+            var message = "";
+            switch (status) {
+                case "timeout":
+                    message = "Form submission timed out. Please try again.";
+                    break;
+                case "abort":
+                    message = "Form submission was cancelled.";
+                    break;
+                case "error":
+                default:
+                    message = "An error has occurred. Please try again.";
+                    break;
+            }
+            // Set message
+            self.addGenericError(message);
+        };
+    };
+
     function parse_results(result, form, msgdiv, leave_open, not_reset_form, prefix) {
         var options = {
             overlay: true,
