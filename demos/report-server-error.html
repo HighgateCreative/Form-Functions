@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+.error {
+    color: #c00;
+}
+* {
+    font-family: sans-serif;
+}
+    </style>
+</head>
+<body>
+    <h2>Report Server Errors</h2>
+    <p>This form will auto submit after 1 second and will display the general server error.</p>
+    <div id="msgs"></div>
+    <form action="#">
+        <p class="wrap">
+            <label for="thing" class="label">Thing</label>
+            <input id="thing" type="text" name="thing">
+        </p>
+        <p class="wrap"><input type="submit" value="Go"></p>
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="../dist/form_functions.js"></script>
+    <script>
+        $(function() {
+            var formFunctions = new FormFunctions({
+                msgdiv: 'msgs',
+                prependMsg: true
+            });
+            setTimeout(function () {
+                $.ajax({
+                    url: '/nowhere',
+                    error: formFunctions.reportServerErrorCallback(),
+                    success: function() {
+                        alert('It succeeded?');
+                    }
+                });
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
