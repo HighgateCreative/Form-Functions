@@ -23,21 +23,21 @@ var ffOpts = {
       window.location="/thanks";
     }
   }
-}
+};
 // Create form function object for this form
-var formFunctions = new FormFunctions(ffOpts)
+var formFunctions = new FormFunctions(ffOpts);
 
 $('#contact').ajaxForm({
   type: "POST",
   url: $(this).attr('action'),
   datatype: "json",
-  beforeSubmit: function(){
+  beforeSubmit: function () {
     // Call form_functions.js's to reset all the <label>s
     normalize_labels($('#product_form'));
   },
   // Create error callback for general server errors
   error: formFunctions.reportServerErrorCallback(),
-  success: function(result){
+  success: function (result) {
     // Call form_functions.js's parse_results() to check for errors
     // in the response
     ffOpts.result = result
