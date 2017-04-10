@@ -12,6 +12,21 @@ form_functions.js assumes the form has an id and there is an element which will 
 </form>
 
 <script>
+// Declare configuration for Form Functions
+var ffOpts = {
+  form: 'contact',
+  msgdiv: 'msgs',
+  success: function (result) {
+    if ( result.path ) {
+      window.location="/" + result.path;
+    } else {
+      window.location="/thanks";
+    }
+  }
+}
+// Create form function object for this form
+var formFunctions = new FormFunctions(ffOpts)
+
 $('#contact').ajaxForm({
   type: "POST",
   url: $(this).attr('action'),
@@ -20,21 +35,13 @@ $('#contact').ajaxForm({
     // Call form_functions.js's to reset all the <label>s
     normalize_labels($('#product_form'));
   },
+  // Create error callback for general server errors
+  error: formFunctions.reportServerErrorCallback(),
   success: function(result){
     // Call form_functions.js's parse_results() to check for errors
     // in the response
-    parse_results({
-      result: result,
-      form: 'contact',
-      msgdiv: 'msgs',
-      success: function (result) {
-        if ( result.path ) {
-          window.location="/" + result.path;
-        } else {
-          window.location="/thanks";
-        }
-      }
-    });
+    ffOpts.result = result
+    parse_results(ffOpts);
   }
 }); //submit
 </script>
@@ -82,6 +89,40 @@ parse_results({
   error: function (result) {}   // Callback for when errors are found.
                                 // `result` is the results originally
                                 // passed into the result argument.
+});
+```
+
+### FormFunctions
+
+This constructor is an object that holds how a give form is to parse and respond
+to errors and submissions of the form. It has helper methods that provide ready
+made solutions to receiving, manage and displaying error messages.
+
+```js
+var formFunctions = new FormFunctions({
+  // Same options as parse_results
+});
+```
+
+#### reportServerErrorCallback
+
+This method of `FormFunctions` generates a callback handler to post general
+error messages from the server such as `500` errors, timeouts and aborted
+submissions. Pass this as an [error handler](http://api.jquery.com/jquery.ajax/) for jQuery's `$.ajax()`.
+
+```js
+var formFunctions = new FormFunctions({ msgdiv: '#msg' });
+
+$('form').ajaxForm({
+  error: formFunctions.reportServerErrorCallback(),
+  success: function (result) {
+    var opts = {
+      msgdiv: '#msg',
+      result: result,
+      ...
+    };
+    parse_results(opts);
+  }
 });
 ```
 
