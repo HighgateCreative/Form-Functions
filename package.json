@@ -1,6 +1,6 @@
 {
   "name": "Form-Functions",
-  "version": "1.2.2",
+  "version": "1.6.1",
   "description": "Help functions for processing form errors",
   "private": true,
   "scripts": {
