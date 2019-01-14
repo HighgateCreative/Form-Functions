@@ -12,8 +12,7 @@
     "grunt-contrib-concat": "~0.4.0",
     "grunt-contrib-jshint": "~0.10.0",
     "grunt-contrib-uglify": "~0.4.0",
-    "grunt-contrib-watch": "^0.6.1",
-    "jquery": "^1.7.0"
+    "grunt-contrib-watch": "^0.6.1"
   },
   "author": "lejeunerenard",
   "readmeFilename": "README.md",
