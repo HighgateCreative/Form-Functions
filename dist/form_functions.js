@@ -3,7 +3,7 @@
  *  Help functions for processing form errors
  *  http://highgate-creative.com
  *
- *  Made by
+ *  Made by 
  *  Sean Zellmer <sean@lejeunerenard.com>
  *  Bradford Cathey <bradc@highgate-creative.com>
  *  Under MIT License

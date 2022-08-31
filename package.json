@@ -17,7 +17,7 @@
   "author": "lejeunerenard",
   "readmeFilename": "README.md",
   "dependencies": {
-    "jquery": ">3.0.0"
+    "jquery": "^3.6.1"
   },
   "license": "MIT"
 }
